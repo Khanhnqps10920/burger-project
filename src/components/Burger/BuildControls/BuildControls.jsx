@@ -16,7 +16,8 @@ class BuildControls extends PureComponent {
       ingredientRemoved,
       disabled,
       price,
-      purchaseable
+      purchaseable,
+      ordered
     } = this.props;
     return (
       <div className="BuildControls">
@@ -34,7 +35,11 @@ class BuildControls extends PureComponent {
             />
           );
         })}
-        <button disabled={!purchaseable} className="OrderButton">
+        <button
+          disabled={!purchaseable}
+          onClick={ordered}
+          className="OrderButton"
+        >
           ORDER NOW
         </button>
       </div>

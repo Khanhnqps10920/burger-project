@@ -26,13 +26,15 @@ class BurgerBuilder extends PureComponent {
       },
       listIngredient: [],
       total: 0,
-      purchaseable: false
+      purchaseable: false,
+      purchasing: false
     };
   }
 
   updatePurchase = () => {
     this.setState(prevState => {
       const ingredients = { ...prevState.ingredients };
+      console.log(Object.keys(ingredients));
       const sum = Object.keys(ingredients)
         .map(ig => {
           return ingredients[ig];
@@ -116,8 +118,12 @@ class BurgerBuilder extends PureComponent {
     this.updatePurchase();
   };
 
+  handlePurchase = () => {
+    this.setState({ purchasing: true });
+  };
+
   render() {
-    const { ingredients, total, purchaseable } = this.state;
+    const { ingredients, total, purchaseable, purchasing } = this.state;
 
     const disableInfo = {
       ...ingredients
@@ -126,21 +132,21 @@ class BurgerBuilder extends PureComponent {
     for (const key in disableInfo) {
       disableInfo[key] = disableInfo[key] <= 0;
     }
-    console.log(disableInfo);
     return (
       <Aux>
+        <Modal show={purchasing}>
+          <OrderSummary ingredients={ingredients} />
+        </Modal>
+
         <Burger ingredients={ingredients} />
         <BuildControls
           ingredientAdded={this.handleAddIngredient}
           ingredientRemoved={this.handleRemoveIngredient}
           disabled={disableInfo}
           price={total}
+          ordered={this.handlePurchase}
           purchaseable={purchaseable}
         />
-
-        <Modal>
-          <OrderSummary ingredients={ingredients} />
-        </Modal>
       </Aux>
     );
   }

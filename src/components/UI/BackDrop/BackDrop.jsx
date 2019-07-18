@@ -1,11 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import "./BackDrop.css";
 
 const propTypes = {};
 
 class BackDrop extends PureComponent {
   render() {
-    return <div />;
+    const { show } = this.props;
+
+    return show ? <div className="Backdrop" /> : null;
   }
 }
 
