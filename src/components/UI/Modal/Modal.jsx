@@ -8,10 +8,10 @@ const propTypes = {};
 
 class Modal extends PureComponent {
   render() {
-    const { children, show } = this.props;
+    const { children, show, modalClosed } = this.props;
     return (
       <Aux>
-        <BackDrop show={show} />
+        <BackDrop show={show} clicked={modalClosed} />
         <div
           className="Modal"
           style={{

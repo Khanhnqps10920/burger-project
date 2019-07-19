@@ -6,9 +6,9 @@ const propTypes = {};
 
 class BackDrop extends PureComponent {
   render() {
-    const { show } = this.props;
+    const { show, clicked } = this.props;
 
-    return show ? <div className="Backdrop" /> : null;
+    return show ? <div className="Backdrop" onClick={clicked} /> : null;
   }
 }
 
